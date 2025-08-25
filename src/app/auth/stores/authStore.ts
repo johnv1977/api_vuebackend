@@ -5,7 +5,7 @@
  * Maneja el estado de autenticación del usuario usando authService como única fuente de verdad
  */
 
-import type { AuthRegisterRequest, LoginCredentials, User } from '../interfaces/interfaces'
+import type { AuthRegisterRequest, LoginCredentials, User } from '../types/types'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 import authService from '../services/authService'
@@ -20,7 +20,7 @@ export const useAuthStore = defineStore('auth', () => {
   // Getters
   const isAuthenticated = computed(() => !!user.value && !!token.value)
   const userRole = computed(() => user.value?.displayName || 'guest')
-  const userName = computed(() => user.value?.username || '')
+  const userName = computed(() => user.value?.userName || '')
 
   // Actions
   async function login (credentials: LoginCredentials) {
@@ -32,10 +32,11 @@ export const useAuthStore = defineStore('auth', () => {
       const response = await authService.login(credentials)
 
       // Actualizar estado con la respuesta del servicio
-      token.value = response.accessToken
+      token.value = response.accessToken ?? ''
+      user.value = response.user
 
       // Persistir en localStorage
-      localStorage.setItem('auth_token', response.accessToken)
+      localStorage.setItem('auth_token', response.accessToken ?? '')
 
       return response
     } catch (error_) {
@@ -54,10 +55,10 @@ export const useAuthStore = defineStore('auth', () => {
       const response = await authService.register(credentials)
 
       // Actualizar estado con la respuesta del servicio
-      token.value = response.accessToken
+      token.value = response.accessToken ?? ''
 
       // Persistir en localStorage
-      localStorage.setItem('auth_token', response.accessToken)
+      localStorage.setItem('auth_token', response.accessToken ?? '')
 
       return response
     } catch (error_) {

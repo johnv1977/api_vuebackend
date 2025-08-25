@@ -5,7 +5,7 @@
  * Servicio para manejar la autenticación con el backend .NET API
  */
 
-import type { AuthRegisterRequest, AuthResponse, LoginCredentials, User } from '@/app/auth/interfaces/interfaces'
+import type { AuthRegisterRequest, AuthResponse, LoginCredentials, User } from '@/app/auth/types/types'
 import { API_BASE_URL, API_ENDPOINTS } from '@/config/const/api_endpoints'
 
 class AuthService {

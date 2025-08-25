@@ -235,7 +235,7 @@
         })
         : authStore.register({
           username: registerForm.name,
-          displayname: '', // Se omite displayname por ahora
+          displayName: '',
           email: registerForm.email,
           password: registerForm.password,
         }))

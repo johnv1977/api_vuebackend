@@ -26,6 +26,15 @@ const routes = [
       title: 'Autenticación',
     },
   },
+  {
+    path: '/register',
+    name: 'register',
+    component: AuthView,
+    meta: {
+      requiresGuest: true, // Solo accesible si no está autenticado
+      title: 'Autenticación',
+    },
+  },
   // Redirigir cualquier ruta no encontrada a la página de inicio
   {
     path: '/:pathMatch(.*)*',
