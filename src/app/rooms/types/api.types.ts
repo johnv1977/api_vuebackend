@@ -89,11 +89,3 @@ export interface DeleteRoomParams {
 export interface UpdateRoomParams {
   slug: string
 }
-
-/**
- * Respuesta para operaciones exitosas sin contenido
- */
-export interface VoidResponse {
-  success: boolean
-  message?: string
-}

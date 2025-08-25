@@ -41,3 +41,11 @@ export interface RoomFilters extends PaginationParams {
   isOpen?: boolean
   search?: string // Para búsqueda por nombre en cliente
 }
+
+/**
+ * Respuesta para operaciones exitosas sin contenido
+ */
+export interface VoidResponse {
+  success: boolean
+  message?: string
+}

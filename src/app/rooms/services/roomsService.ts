@@ -6,18 +6,17 @@
  * Implementa exactamente los endpoints del swagger.json
  */
 
+import type { ErrorResponse, VoidResponse } from '../../../common/types/swagger.types'
 import type {
   CreateRoomDto,
   DeleteRoomParams,
-  ErrorResponse,
   GetRoomParams,
   RoomListDtoPaginatedResult,
   RoomResponseDto,
   UpdateRoomDto,
   UpdateRoomParams,
-  VoidResponse,
 } from '@/app/rooms/types'
-import { API_BASE_URL, API_ENDPOINTS } from '@/config/const/api_endpoints'
+import { API_BASE_URL, API_ENDPOINTS } from '../../../config/const/api_endpoints'
 
 class RoomsService {
   /**

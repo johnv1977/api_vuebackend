@@ -13,7 +13,6 @@ export type {
   RoomLoadingStates,
   RoomResponseDto,
   UpdateRoomParams,
-  VoidResponse,
 } from './api.types'
 
 // DTOs para operaciones
@@ -23,11 +22,3 @@ export type {
   RoomFormValidation,
   UpdateRoomDto,
 } from './room.types'
-
-// Tipos base del swagger
-export type {
-  ErrorResponse,
-  PaginatedResult,
-  PaginationParams,
-  RoomFilters,
-} from './swagger.types'
