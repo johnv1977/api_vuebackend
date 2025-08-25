@@ -10,6 +10,11 @@ declare module 'vue' {
   export interface GlobalComponents {
     HeaderLogo: typeof import('./common/components/HeaderLogo.vue')['default']
     HelloWorld: typeof import('./common/components/HelloWorld.vue')['default']
+    RoomActions: typeof import('./app/rooms/components/RoomActions.vue')['default']
+    RoomCard: typeof import('./app/rooms/components/RoomCard.vue')['default']
+    RoomFilters: typeof import('./app/rooms/components/RoomFilters.vue')['default']
+    RoomForm: typeof import('./app/rooms/components/RoomForm.vue')['default']
+    RoomPagination: typeof import('./app/rooms/components/RoomPagination.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

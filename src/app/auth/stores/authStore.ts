@@ -37,6 +37,7 @@ export const useAuthStore = defineStore('auth', () => {
 
       // Persistir en localStorage
       localStorage.setItem('auth_token', response.accessToken ?? '')
+      localStorage.setItem('user', JSON.stringify(response.user))
 
       return response
     } catch (error_) {
@@ -125,12 +126,13 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   async function loadUserFromStorage () {
+    console.log('AuthStore: loadUserFromStorage action called')
     const storedUser = localStorage.getItem('user')
     const storedToken = localStorage.getItem('auth_token')
 
     if (storedUser && storedToken) {
       try {
-        user.value = JSON.parse(storedUser)
+        user.value = typeof storedUser === 'string' ? JSON.parse(storedUser) : storedUser
         token.value = storedToken
 
         // Verificar que el token sigue siendo válido

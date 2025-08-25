@@ -139,7 +139,7 @@
       })
 
       // Redirigir al dashboard o página principal
-      await router.push('/')
+      await router.push('/rooms')
     } catch (error) {
       // El error ya se maneja en el store
       console.error('Error en autenticación:', error)
