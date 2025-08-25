@@ -5,7 +5,7 @@
  * Maneja el estado de autenticación del usuario usando authService como única fuente de verdad
  */
 
-import type { AuthRegisterRequest, LoginCredentials, User } from '../types/types'
+import type { AuthRegisterRequest, LoginCredentials, User } from '../types/authTypes'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 import authService from '../services/authService'

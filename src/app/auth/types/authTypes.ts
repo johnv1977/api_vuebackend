@@ -1,9 +1,15 @@
-// Interfaces
+/**
+ * Tipos del módulo de autenticación
+ * Basados en swagger.json
+ */
+
+// Interfaces para credenciales de login
 export interface LoginCredentials {
   usernameOrEmail: string
   password: string
 }
 
+// Interface para registro de usuario
 export interface AuthRegisterRequest {
   username: string
   email: string
@@ -11,6 +17,7 @@ export interface AuthRegisterRequest {
   displayName?: string | null
 }
 
+// Interface para usuario
 export interface User {
   id?: string | null
   userName?: string | null
@@ -30,12 +37,14 @@ export interface User {
   displayName?: string | null
 }
 
+// Interface para respuesta de autenticación
 export interface AuthResponse {
   accessToken?: string | null
   expiresAt: string
   user: User
 }
 
+// Interface para errores de API
 export interface ApiError {
   type?: string | null
   title?: string | null

@@ -6,7 +6,7 @@
  * Implementa exactamente los endpoints del swagger.json
  */
 
-import type { ErrorResponse, VoidResponse } from '../../../common/types/swagger.types'
+import type { ErrorResponse, VoidResponse } from '../../../common/types/api_types'
 import type {
   CreateRoomDto,
   DeleteRoomParams,
