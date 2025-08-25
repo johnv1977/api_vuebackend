@@ -8,7 +8,7 @@
       />
 
       <div class="mb-6">
-        <h1 class="text-h3 font-weight-bold">DNU</h1>
+        <h1 class="text-h3 font-weight-bold">ABBC</h1>
         <div class="text-body-1 font-weight-light mb-n1">Games</div>
       </div>
 

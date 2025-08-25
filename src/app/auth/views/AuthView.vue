@@ -13,7 +13,7 @@
           src="/assets/logo.png"
           width="80"
         />
-        <h1 class="text-h4 font-weight-bold text-primary">DNU Games</h1>
+        <h1 class="text-h4 font-weight-bold text-primary">ABBC Games</h1>
         <p class="text-body-2 text-medium-emphasis">
           {{
             isLoginMode ? "Inicia sesión en tu cuenta" : "Crea tu cuenta nueva"
