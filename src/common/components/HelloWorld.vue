@@ -82,7 +82,7 @@
             prepend-icon="mdi-account-plus"
             size="large"
             variant="outlined"
-            @click="goToAuth"
+            @click="goToRegister"
           >
             Registrarse
           </v-btn>
@@ -113,6 +113,10 @@
   // Methods
   function goToAuth () {
     router.push('/auth')
+  }
+
+  function goToRegister () {
+    router.push('/register')
   }
 
   function handleLogout () {

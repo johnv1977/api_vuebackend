@@ -7,7 +7,7 @@
     <v-card class="pa-6 elevation-8" width="100%">
       <!-- Header con logo -->
       <header-logo>
-        <p class="text-body-2 text-medium-emphasis">Inicia sesión en tu cuenta</p>
+        <p class="text-body-2 text-medium-emphasis">Crea tu cuenta nueva</p>
       </header-logo>
 
       <!-- Mostrar errores -->
@@ -24,8 +24,18 @@
 
       <v-form ref="formRef" @submit.prevent="handleSubmit">
         <v-text-field
-          v-model="loginForm.email"
+          v-model="registerForm.name"
           class="my-3"
+          label="Nombre completo"
+          prepend-inner-icon="mdi-account"
+          required
+          :rules="nameRules"
+          variant="outlined"
+        />
+
+        <v-text-field
+          v-model="registerForm.email"
+          class="mb-3"
           label="Correo electrónico"
           prepend-inner-icon="mdi-email"
           required
@@ -35,8 +45,9 @@
         />
 
         <v-text-field
-          v-model="loginForm.password"
+          v-model="registerForm.password"
           :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+          class="mb-3"
           label="Contraseña"
           prepend-inner-icon="mdi-lock"
           required
@@ -44,6 +55,20 @@
           :type="showPassword ? 'text' : 'password'"
           variant="outlined"
           @click:append-inner="showPassword = !showPassword"
+        />
+
+        <v-text-field
+          v-model="registerForm.confirmPassword"
+          label="Confirmar contraseña"
+          :type="showConfirmPassword ? 'text' : 'password'"
+          variant="outlined"
+          prepend-inner-icon="mdi-lock-check"
+          :append-inner-icon="
+            showConfirmPassword ? 'mdi-eye' : 'mdi-eye-off'
+          "
+          :rules="confirmPasswordRules"
+          required
+          @click:append-inner="showConfirmPassword = !showConfirmPassword"
         />
 
         <!-- Botones de acción -->
@@ -58,8 +83,8 @@
             :disabled="authStore.isLoading"
             @click="handleSubmit"
           >
-            <v-icon start>mdi-login</v-icon>
-            Iniciar Sesión
+            <v-icon start>mdi-account-plus</v-icon>
+            Crear Cuenta
           </v-btn>
         </div>
       </v-form>
@@ -79,10 +104,10 @@
           variant="text"
           color="primary"
           class="flex-grow-1 mr-2"
-          @click="goToRegister"
+          @click="goToAuth"
         >
-          <v-icon start>mdi-account-plus</v-icon>
-          Registrarse
+          <v-icon start>mdi-login</v-icon>
+          Iniciar Sesión
         </v-btn>
       </div>
     </v-card>
@@ -90,7 +115,7 @@
 </template>
 
 <script setup lang="ts">
-  import { reactive, ref } from 'vue'
+  import { computed, reactive, ref, watch } from 'vue'
   import { useRouter } from 'vue-router'
   import { useAuthStore } from '../stores/authStore'
 
@@ -100,12 +125,14 @@
 
   // State reactivo
   const showPassword = ref(false)
+  const showConfirmPassword = ref(false)
   const formRef = ref()
 
-  // Formularios reactivos
-  const loginForm = reactive({
+  const registerForm = reactive({
+    name: '',
     email: '',
     password: '',
+    confirmPassword: '',
   })
 
   // Reglas de validación
@@ -120,11 +147,21 @@
       (v && v.length >= 6) || 'La contraseña debe tener al menos 6 caracteres',
   ]
 
-  // Methods
-  function goToRegister () {
-    router.push('/register')
-  }
+  const nameRules = [
+    (v: string) => !!v || 'El nombre es requerido',
+    (v: string) =>
+      (v && v.length >= 2) || 'El nombre debe tener al menos 2 caracteres',
+  ]
 
+  const confirmPasswordRules = [
+    (v: string) => !!v || 'Confirma tu contraseña',
+    (v: string) => v === registerForm.password || 'Las contraseñas no coinciden',
+  ]
+
+  // Methods
+  function goToAuth () {
+    router.push('/auth')
+  }
   async function handleSubmit () {
     const { valid } = await formRef.value?.validate()
 
@@ -133,13 +170,16 @@
     }
 
     try {
-      await authStore.login({
-        usernameOrEmail: loginForm.email,
-        password: loginForm.password,
-      })
+      await (authStore.register({
+        username: registerForm.name,
+        displayName: '',
+        email: registerForm.email,
+        password: registerForm.password,
+      }))
 
+      // Si llegamos aquí, el registro fue exitoso
       // Redirigir al dashboard o página principal
-      await router.push('/')
+      await router.push('/login')
     } catch (error) {
       // El error ya se maneja en el store
       console.error('Error en autenticación:', error)

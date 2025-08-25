@@ -8,6 +8,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 // Importamos las vistas
 import AuthView from '@/app/auth/views/AuthView.vue'
+import RegisterView from '@/app/auth/views/RegisterView.vue'
 import IndexPage from '@/common/pages/index.vue'
 
 // Definimos las rutas manualmente
@@ -29,7 +30,7 @@ const routes = [
   {
     path: '/register',
     name: 'register',
-    component: AuthView,
+    component: RegisterView,
     meta: {
       requiresGuest: true, // Solo accesible si no está autenticado
       title: 'Autenticación',
